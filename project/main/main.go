@@ -6,7 +6,7 @@ import (
 	"github.com/hashicorp/go-hclog"
 	"google.golang.org/grpc"
 	protos "github.com/manureddy7143/sql/project/protos"
-	server "github.com/manureddy7143/sql/project/protos/server"
+	"github.com/manureddy7143/sql/project/server"
     "google.golang.org/grpc/reflection"
 
 
@@ -19,7 +19,7 @@ func main(){
 
 	gs := grpc.NewServer()
 	cs := server.NewCourse(log)
-	
+
 
 	protos.RegisterCourseService(gs,cs)
 	reflection.Register(gs)

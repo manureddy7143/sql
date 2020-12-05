@@ -8,16 +8,16 @@ import(
 type Course struct{
 	log hclog.Logger
 }
-func NewCourse(l hclog.Logger) *Currency {
+func NewCourse(l hclog.Logger) *Course {
 	return &Course{l}
 
 }  
 	
 
 
-func (c *Course) GetKey(ctx context.Context, rr *protos.Request) (*protos.Response,error) {
+func (c *Course) Getcourse(ctx context.Context, rr *protos.Request) (*protos.Response,error) {
 	c.log.Info( "key", rr.GetKey())
-
+/* fgg*/
  
  return &protos.Response{Value:"available",Count:1,Hour:"7",Repeat:5},nil
 }

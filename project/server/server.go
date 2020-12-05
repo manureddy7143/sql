@@ -16,7 +16,9 @@ func NewCourse(l hclog.Logger) *Currency {
 
 
 func (c *Course) GetKey(ctx context.Context, rr *protos.Request) (*protos.Response,error) {
+	c.log.Info( "key", rr.GetKey())
+
  
- return &protos.Response{Value:"available",Count=1,Hour:"7",Repeat=5},nil
+ return &protos.Response{Value:"available",Count:1,Hour:"7",Repeat:5},nil
 }
 

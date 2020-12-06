@@ -13,14 +13,12 @@ type Course struct {
 func NewCourse(l hclog.Logger) *Course {
 	return &Course{l}
 }
-
-
 	
 // "Getcourse is a"
-func (c *Course) Getcourse(ctx context.Context, rr *protos.Request) (*protos.Response, error) {
-	c.log.Info( "key", rr.GetKey())
+func (c *Course) Getcourse(ctx context.Context, rr *protos.Request) (*protos.Response,error) {
+	c.log.Info( "Handle Getcourse","key", rr.GetKey())
 /* fgg*/
  
- return &protos.Response{Value:"available",Count:1,Hour:"7",Repeat:5},nil
+ return &protos.Response{Value:"available",Count:1,Hour:"7",Repeat:5}, nil
 }
 

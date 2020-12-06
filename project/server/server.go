@@ -15,9 +15,8 @@ func NewCourse(l hclog.Logger) *Course {
 }
 	
 // "Getcourse is a"
-func (c *Course) Getcourse(ctx context.Context, rr *protos.Request) (*protos.Response,error) {
+func (c *Course) Getcourse(ctx Context.Context, rr *protos.Request) (*protos.Response,error) {
 	c.log.Info( "Handle Getcourse","key", rr.GetKey())
-/* fgg*/
  
  return &protos.Response{Value:"available",Count:1,Hour:"7",Repeat:5}, nil
 }

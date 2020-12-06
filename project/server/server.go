@@ -4,18 +4,20 @@ import(
 	protos "github.com/manureddy7143/sql/project/protos"
 	"context"
 )
-
-type Course struct{
+// Course is
+type Course struct {
 	log hclog.Logger
 }
+
+// NewCourse is
 func NewCourse(l hclog.Logger) *Course {
 	return &Course{l}
+}
 
-}  
+
 	
-
-
-func (c *Course) Getcourse(ctx context.Context, rr *protos.Request) (*protos.Response,error) {
+// "Getcourse is a"
+func (c *Course) Getcourse(ctx context.Context, rr *protos.Request) (*protos.Response, error) {
 	c.log.Info( "key", rr.GetKey())
 /* fgg*/
  

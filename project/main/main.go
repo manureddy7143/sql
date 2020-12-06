@@ -21,11 +21,11 @@ func main(){
 	cs := server.NewCourse(log)
 
 
-	protos.RegisterCourseService(gs,cs)
+	protos.RegisterCourseServer(gs,cs)
 	reflection.Register(gs)
 	l,err := net.Listen("tcp",":8080")
 	if err !=nil {
-		log.Error{"unable to listen","error",err}
+		log.Error("unable to listen","error", err)
 		os.Exit(1)
 	}
 	gs.Serve(l)

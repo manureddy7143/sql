@@ -1,20 +1,24 @@
 package main
 
 import (
+	
 	"net"
 	"os"
+
 	"github.com/hashicorp/go-hclog"
-	"google.golang.org/grpc"
 	protos "github.com/manureddy7143/sql/project/protos"
 	"github.com/manureddy7143/sql/project/server"
-    "google.golang.org/grpc/reflection"
-
-
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
+	
 
 )
 
-func main(){
 
+
+func main(){
+	
+	
 	log := hclog.Default()
 
 	gs := grpc.NewServer()
@@ -23,7 +27,7 @@ func main(){
 
 	protos.RegisterCourseServer(gs,cs)
 	reflection.Register(gs)
-	l,err := net.Listen("tcp",":8080")
+	l,err := net.Listen("tcp",":8000")
 	if err !=nil {
 		log.Error("unable to listen","error", err)
 		os.Exit(1)

@@ -43,6 +43,7 @@ func (c *Course) Getcourse(ctx context.Context, rr *protos.Request) (*protos.Res
 
 	a := rr.GetKey()
 
+
 	b, _, _ := time.Now().Clock()
 
 	date = time.Now().Format("01-02-2006")
@@ -51,6 +52,7 @@ func (c *Course) Getcourse(ctx context.Context, rr *protos.Request) (*protos.Res
 	db ,err := sql.Open("mysql", "manu:143114@mM@tcp(127.0.0.1:3306)/courser")
 	if err != nil {
 		panic(err.Error())
+		fmt.Println("err")
 	}
 	defer db.Close()
 

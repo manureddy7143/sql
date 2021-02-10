@@ -50,6 +50,7 @@ func (c *Course) Getcourse(ctx context.Context, rr *protos.Request) (*protos.Res
 	count=0
 	
 	db ,err := sql.Open("mysql", "manu:143114@mM@tcp(127.0.0.1:3306)/courser")
+	fmt.Println("error")
 	if err != nil {
 		panic(err.Error())
 		fmt.Println("err")

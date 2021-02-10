@@ -27,8 +27,7 @@ var(
 
 var db *sql.DB
 var err error
-
-
+var dhour int
 
 
 // NewCourse is
@@ -47,46 +46,35 @@ func (c *Course) Getcourse(ctx context.Context, rr *protos.Request) (*protos.Res
 	b, _, _ := time.Now().Clock()
 
 	date = time.Now().Format("01-02-2006")
+	count=0
 	
-	db ,err := sql.Open("mysql", "root:143114@tcp(127.0.0.1:3306)/courser")
+	db ,err := sql.Open("mysql", "manu:143114@mM@tcp(127.0.0.1:3306)/courser")
 	if err != nil {
 		panic(err.Error())
 	}
 	defer db.Close()
 
-	err = db.QueryRow("SELECT name from courses where name = ? ", a ).Scan(&result)
+	db.QueryRow("SELECT name from courses where name = ? ", a ).Scan(&result)
+	db.QueryRow("SELECT count from details where name = ? and hour = ? and date=? ", a ,b,date).Scan(&count)
 
-	if result == a {
-		var dhour int
-		dcounter := 0
-		repeat := 0
-		err := db.QueryRow("select time from time").Scan(&dhour)
+	if result ==a{
+    switch {
+	case (count==0  ):
+		c:=1
+		_,err=db.Query("INSERT INTO details (name,count,hour,value,date) values(?,?,?,'available',?)" ,a,c,b,date)
+		fmt.Println("insert",c,dhour)
+	case (count!=0 ):
+		_,err=db.Query("UPDATE details SET count = count+1 where hour= ? AND name= ? AND date=? ",b,a,date)
+		fmt.Println("updated",count)
 
-		err = db.QueryRow("select repeated from details where name=? ORDER BY id DESC",a).Scan(&repeat)
+}
 
-		err = db.QueryRow("select count  from details where hour= ? AND name= ? AND date= ?",dhour,a,date).Scan(&dcounter,)
-
-		if (b == dhour && err != nil) {
-			c:=1
-			repeat++
-			_,err=db.Query("INSERT INTO details (name,count,hour,repeated,value,date) values(?,?,?,?,'available',?)" ,a,c,b,repeat,date)
-			fmt.Println("c,repeat,err",c,repeat,err)
-
-		} else if (b == dhour && err == nil){
-			dcounter++
-			_,err=db.Query("UPDATE details SET count = ? where hour= ? AND name= ? ",dcounter,dhour,a)
-			fmt.Println("database updated",err,dcounter)
-
-		} else {
-			_,err=db.Query("TRUNCATE TABLE time")
-			_,err = db.Query("INSERT INTO time values(?)",b)
-		}
 
 	}else{
-		fmt.Println("the course you requseted is not in database")
+		fmt.Println("course not updated")
 	}
 	
-	err = db.QueryRow("SELECT * from details where name = ? ORDER BY id DESC", a ).Scan( &name, &value, &count, &hour,&repeat,&id,&date)
+	err = db.QueryRow("SELECT * from details where name = ? ORDER BY id DESC", a ).Scan( &name, &value, &count, &hour,&id,&date)
 	if err != nil {
 		panic(err.Error())
 	  

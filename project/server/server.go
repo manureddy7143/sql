@@ -64,8 +64,8 @@ func (c *Course) Getcourse(ctx context.Context, rr *protos.Request) (*protos.Res
     switch {
 	case (count==0  ):
 		c:=1
-		_,err=db.Query("INSERT INTO details (name,count,hour,value,date) values(?,?,?,'available',?)" ,a,c,b,date)
-		fmt.Println("insert",c,dhour)
+		_,err=db.Query("INSERT INTO details (id,name,value,count,hour,date) values(1,?,'available',?,?,?)" ,a,c,b,date)
+		fmt.Println("insert",a,c,b,date)
 	case (count!=0 ):
 		_,err=db.Query("UPDATE details SET count = count+1 where hour= ? AND name= ? AND date=? ",b,a,date)
 		fmt.Println("updated",count)

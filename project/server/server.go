@@ -77,12 +77,12 @@ func (c *Course) Getcourse(ctx context.Context, rr *protos.Request) (*protos.Res
 		fmt.Println("course not updated")
 	}
 	
-	err = db.QueryRow("SELECT * from details where name = ? ORDER BY id DESC", a ).Scan( &name, &value, &count, &hour,&id,&date)
+	err = db.QueryRow("SELECT * from details where name = ? ORDER BY id DESC", a ).Scan( &id,&name, &value, &count, &hour,&date)
 	if err != nil {
 		panic(err.Error())
 	  
 		}
 	  
-	return &protos.Response{Value:value,Count:count,Hour:hour,Repeat:repeat}, nil
+	return &protos.Response{Value:value,Count:count,Hour:hour}, nil
 }
 

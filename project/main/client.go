@@ -41,6 +41,6 @@ func course(g *gin.Context){
 		"Response":response,
 	})
 	
-	log.Printf("The '%s' course is '%s' and its traffic is '%d' in the '%sth hour' and it called overall %d times(calulated 1 for each hour) ", message.Key,response.Value,response.Count,response.Hour,response.Repeat)
+	log.Printf("The '%s' course is '%s' and its traffic is '%d' in the '%sth hour' and it called overall times(calulated 1 for each hour) ", message.Key,response.Value,response.Count,response.Hour)
 
 }
